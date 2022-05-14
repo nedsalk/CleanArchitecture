@@ -27,4 +27,9 @@
     </ItemGroup>
 
 
+    <ItemGroup>
+      <ProjectReference Include="..\CleanArchitecture.Core.Analyzers\CleanArchitecture.Core.Analyzers.csproj" />
+    </ItemGroup>
+
+
 </Project>
