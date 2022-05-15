@@ -1,0 +1,9 @@
+﻿-- Stop public entity methods from accessing property setters
+-- Stop public entity methods from creating other entities
+-- Require all entities to be partial for source generation
+
+
+
+-- Figure out a way to put RoslynHelpers in a separate project so that it can be reused with source generators
+Currently, for some reason not known to me, I cannot put this static class into 
+ CleanArchitecture.Core.Roslyn.Helpers and reference it from this project and use in my diagnostics...

@@ -21,7 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\CleanArchitecture.Core.SourceGenerators\CleanArchitecture.Core.SourceGenerators.csproj" />
+      <ProjectReference Include="..\CleanArchitecture.Core.SourceGenerators\CleanArchitecture.Core.SourceGenerators.csproj" />
+      <ProjectReference Include="..\CleanArchitecture.Core\CleanArchitecture.Core.csproj" />
     </ItemGroup>
 
 </Project>

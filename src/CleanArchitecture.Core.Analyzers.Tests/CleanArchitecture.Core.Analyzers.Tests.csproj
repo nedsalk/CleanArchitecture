@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
@@ -11,15 +12,14 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzer.Testing" Version="1.1.1" />
         <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.1.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" Version="1.1.1" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" Version="1.1.1" />
-        <PackageReference Include="Microsoft.CodeAnalysis.Testing.Verifiers.MSTest" Version="1.1.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="1.1.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.XUnit" Version="1.1.1" />
         <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.1.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
+
         <PackageReference Include="coverlet.collector" Version="3.1.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -29,6 +29,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CleanArchitecture.Core.Analyzers\CleanArchitecture.Core.Analyzers.csproj" />
+      <ProjectReference Include="..\CleanArchitecture.Core\CleanArchitecture.Core.csproj" />
     </ItemGroup>
 
 
