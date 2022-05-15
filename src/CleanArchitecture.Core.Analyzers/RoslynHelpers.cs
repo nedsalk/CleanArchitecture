@@ -3,9 +3,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CleanArchitecture.Core.Analyzers;
 
-// TODO: Figure out a way to put this in a separate project so that it can be reused with source generators
-// Currently, for some reason not known to me, I cannot put this static class into 
-// CleanArchitecture.Core.Roslyn.Helpers and reference it from this project and use in my diagnostics...
 public static class RoslynHelpers
 {
     public static bool Is(this ClassDeclarationSyntax classDeclaration, string name, SemanticModel semanticModel,

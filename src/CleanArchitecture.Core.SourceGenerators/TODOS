@@ -1,1 +1,1 @@
-﻿-- Generate default parameterless private constructor to prevent entities from having public constructors
+﻿--- Generate default parameterless private constructor for EF Core if EF Core is being used

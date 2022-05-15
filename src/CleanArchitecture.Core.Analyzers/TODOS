@@ -1,7 +1,8 @@
-﻿-- Stop public entity methods from accessing property setters
--- Stop public entity methods from creating other entities
--- Require all entities to be partial for source generation
-
+﻿--- Stop public entity methods from accessing property setters
+--- Stop public entity methods from creating other entities
+--- Require all entities to be partial for source generation
+--- Force declaration of internal/protected/private constructor on entities
+    in order to avoid default public constructors 
 
 
 -- Figure out a way to put RoslynHelpers in a separate project so that it can be reused with source generators
