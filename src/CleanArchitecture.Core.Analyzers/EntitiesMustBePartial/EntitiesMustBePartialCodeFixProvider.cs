@@ -11,11 +11,11 @@ namespace CleanArchitecture.Core.Analyzers.EntitiesMustBePartial;
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(EntitiesMustBePartialCodeFixProvider)), Shared]
 public class EntitiesMustBePartialCodeFixProvider : CodeFixProvider
 {
-
     public sealed override ImmutableArray<string> FixableDiagnosticIds =>
         ImmutableArray.Create(EntitiesMustBePartialAnalyzer.DiagnosticId);
-    
+
     private const string ToPartial = "Convert to partial";
+
     // public sealed override FixAllProvider GetFixAllProvider()
     // {
     //     // See https://github.com/dotnet/roslyn/blob/main/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
@@ -26,10 +26,9 @@ public class EntitiesMustBePartialCodeFixProvider : CodeFixProvider
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
         var diagnostic = context.Diagnostics.First();
-        var diagnosticSpan = diagnostic.Location.SourceSpan;
 
         // Find the type declaration identified by the diagnostic.
-        var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf()
+        var declaration = root!.FindToken(diagnostic.Location.SourceSpan.Start).Parent!.AncestorsAndSelf()
             .OfType<ClassDeclarationSyntax>().First();
 
         context.RegisterCodeFix(CodeAction.Create(
@@ -53,5 +52,4 @@ public class EntitiesMustBePartialCodeFixProvider : CodeFixProvider
 
         return document.WithSyntaxRoot(newRoot);
     }
-
 }
