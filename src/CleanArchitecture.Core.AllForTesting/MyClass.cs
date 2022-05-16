@@ -2,7 +2,7 @@
 
 namespace CleanArchitecture.Core.AllForTesting;
 
-public class MyClass : Entity
+public partial class MyClass : Entity
 {
     public MyClass(string something)
     {

@@ -4,7 +4,7 @@ using CleanArchitecture.Core.Entities;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
 using Verify =
-    CleanArchitecture.Core.Analyzers.Tests.Verifiers.CSharpAnalyzerVerifier<
+    CleanArchitecture.Core.Analyzers.Tests.Verifiers.CsAnalyzerVerifier<
         CleanArchitecture.Core.Analyzers.NoPublicConstructorOnEntity.NoPublicConstructorOnEntityAnalyzer>;
 
 
@@ -12,20 +12,8 @@ namespace CleanArchitecture.Core.Analyzers.Tests;
 
 public class NoPublicConstructorOnEntityTests : AnalyzerTestBase
 {
-    private const string EntityCode = $@"
-public abstract class {nameof(Entity)} {{
-}}
-";
-
-    private const string AggregateRootCode = $@"
-{EntityCode}
-
-public abstract class {nameof(AggregateRoot)} : {nameof(Entity)} {{
-}}
-";
-
     private static string GetSource(string baseClassName, string ctorType = "public") => $@"
-{AggregateRootCode}
+using {typeof(Entity).Namespace};
 
 public class TestClass : {baseClassName}
 {{
@@ -41,10 +29,10 @@ public class TestClass : {baseClassName}
         var expectedDiagnostic = DiagnosticResult
             .CompilerWarning(NoPublicConstructorOnEntityAnalyzer.DiagnosticId)
             .WithMessageFormat(NoPublicConstructorOnEntityAnalyzer.MessageFormat)
-            .WithLocation(Location, 14, 5);
+            .WithLocation(Location, 6, 5);
 
 
-        await Verify.VerifyAnalyzerAsync(GetSource(nameof(Entity), "public"), expectedDiagnostic);
+        await Verify.VerifyAnalyzerAsync(GetSource(nameof(Entity)), expectedDiagnostic);
     }
 
     [Theory]
@@ -54,7 +42,7 @@ public class TestClass : {baseClassName}
     [InlineData("private protected")]
     public async Task Constructors_with_no_diagnostic(string ctorType)
     {
-        await Verify.VerifyAnalyzerAsync(GetSource(nameof(Entity),ctorType));
+        await Verify.VerifyAnalyzerAsync(GetSource(nameof(Entity), ctorType));
     }
 
     [Fact]
