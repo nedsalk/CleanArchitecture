@@ -44,11 +44,7 @@ public class EntitiesMustBePartialCodeFixProvider : CodeFixProvider
         var oldRoot = await document.GetSyntaxRootAsync(cancellationToken);
 
         var newRoot = oldRoot!.ReplaceNode(declaration,
-            declaration.AddModifiers(SyntaxFactory.Token(
-                SyntaxTriviaList.Empty,
-                SyntaxKind.PartialKeyword,
-                SyntaxFactory.TriviaList(SyntaxFactory.Whitespace(" "))
-            )));
+            declaration.AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword)));
 
         return document.WithSyntaxRoot(newRoot);
     }
