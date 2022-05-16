@@ -24,23 +24,12 @@ public abstract class {nameof(AggregateRoot)} : {nameof(Entity)} {{
 }}
 ";
 
-    private static string GetEntitySource(string ctorType) => $@"
-{EntityCode}
-
-public class MyTestClass : {nameof(Entity)}
-{{
-    {ctorType} MyTestClass()
-    {{
-    }}
-}}
-";
-
-    private static string GetAggregateRootSource() => $@"
+    private static string GetSource(string baseClassName, string ctorType = "public") => $@"
 {AggregateRootCode}
 
-public class MyTestClass : {nameof(AggregateRoot)}
+public class TestClass : {baseClassName}
 {{
-    public MyTestClass()
+    {ctorType} TestClass()
     {{
     }}
 }}
@@ -52,10 +41,10 @@ public class MyTestClass : {nameof(AggregateRoot)}
         var expectedDiagnostic = DiagnosticResult
             .CompilerWarning(NoPublicConstructorOnEntityAnalyzer.DiagnosticId)
             .WithMessageFormat(NoPublicConstructorOnEntityAnalyzer.MessageFormat)
-            .WithLocation(Location, 9, 5);
+            .WithLocation(Location, 14, 5);
 
 
-        await Verify.VerifyAnalyzerAsync(GetEntitySource("public"), expectedDiagnostic);
+        await Verify.VerifyAnalyzerAsync(GetSource(nameof(Entity), "public"), expectedDiagnostic);
     }
 
     [Theory]
@@ -65,12 +54,12 @@ public class MyTestClass : {nameof(AggregateRoot)}
     [InlineData("private protected")]
     public async Task Constructors_with_no_diagnostic(string ctorType)
     {
-        await Verify.VerifyAnalyzerAsync(GetEntitySource(ctorType));
+        await Verify.VerifyAnalyzerAsync(GetSource(nameof(Entity),ctorType));
     }
 
     [Fact]
     public async Task AggregateRoot_has_no_diagnostic()
     {
-        await Verify.VerifyAnalyzerAsync(GetAggregateRootSource());
+        await Verify.VerifyAnalyzerAsync(GetSource(nameof(AggregateRoot)));
     }
 }
