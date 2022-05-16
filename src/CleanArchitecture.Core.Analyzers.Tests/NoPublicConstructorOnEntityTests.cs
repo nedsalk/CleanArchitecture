@@ -50,7 +50,7 @@ public class MyTestClass : {nameof(AggregateRoot)}
     public async Task Public_constructor_has_diagnostic()
     {
         var expectedDiagnostic = DiagnosticResult
-            .CompilerError(NoPublicConstructorOnEntityAnalyzer.DiagnosticId)
+            .CompilerWarning(NoPublicConstructorOnEntityAnalyzer.DiagnosticId)
             .WithMessageFormat(NoPublicConstructorOnEntityAnalyzer.MessageFormat)
             .WithLocation(Location, 9, 5);
 
@@ -58,22 +58,14 @@ public class MyTestClass : {nameof(AggregateRoot)}
         await Verify.VerifyAnalyzerAsync(GetEntitySource("public"), expectedDiagnostic);
     }
 
-    [Fact]
-    public async Task Internal_constructor_has_no_diagnostic()
+    [Theory]
+    [InlineData("internal")]
+    [InlineData("protected")]
+    [InlineData("private")]
+    [InlineData("private protected")]
+    public async Task Constructors_with_no_diagnostic(string ctorType)
     {
-        await Verify.VerifyAnalyzerAsync(GetEntitySource("internal"));
-    }
-
-    [Fact]
-    public async Task Protected_constructor_has_no_diagnostic()
-    {
-        await Verify.VerifyAnalyzerAsync(GetEntitySource("protected"));
-    }
-
-    [Fact]
-    public async Task Private_constructor_has_no_diagnostic()
-    {
-        await Verify.VerifyAnalyzerAsync(GetEntitySource("private"));
+        await Verify.VerifyAnalyzerAsync(GetEntitySource(ctorType));
     }
 
     [Fact]
