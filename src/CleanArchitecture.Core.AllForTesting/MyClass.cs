@@ -4,7 +4,7 @@ namespace CleanArchitecture.Core.AllForTesting;
 
 public class MyClass : Entity
 {
-    public MyClass()
+    public MyClass(string something)
     {
     }
 }
