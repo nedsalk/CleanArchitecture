@@ -10,7 +10,7 @@ public interface IIntegrationEvent<in TDomainEvent> : IIntegrationEvent where TD
 {
 }
 
-public interface IIntegrationEvent<in TDomainEvent, out TIntegrationEvent> : IIntegrationEvent<TDomainEvent>
+public interface IIntegrationEvent<in TDomainEvent, out TIntegrationEvent> : IIntegrationEvent
     where TDomainEvent : DomainEvent
 {
     TIntegrationEvent From(TDomainEvent domainEvent);

@@ -9,12 +9,13 @@
 
     <ItemGroup>
         <ProjectReference Include="..\CleanArchitecture.Core.Analyzers\CleanArchitecture.Core.Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\CleanArchitecture.Core.SourceGenerators\CleanArchitecture.Core.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
         <ProjectReference Include="..\CleanArchitecture.Core\CleanArchitecture.Core.csproj" />
     </ItemGroup>
 
-<!--    <ItemGroup>-->
-<!--        <Analyzer Include="..//CleanArchitecture.Core.Analyzers/bin/Debug/net6.0/CleanArchitecture.Core.Analyzers.dll"/>-->
-<!--    </ItemGroup>-->
+    <!--    <ItemGroup>-->
+    <!--        <Analyzer Include="..//CleanArchitecture.Core.Analyzers/bin/Debug/net6.0/CleanArchitecture.Core.Analyzers.dll"/>-->
+    <!--    </ItemGroup>-->
 
     <!--    <ItemGroup>-->
     <!--        <ProjectReference Include="..\CleanArchitecture.Core.Analyzers\CleanArchitecture.Core.Analyzers.csproj" >-->

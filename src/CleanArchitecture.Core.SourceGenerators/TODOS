@@ -1,1 +1,3 @@
 ﻿--- Generate default parameterless private constructor for EF Core if EF Core is being used
+--- Instead of using IIntegrationEvent<> it would be better to use [IntegrationEvent] attribute 
+    So that the info "Class 'SomeIntegrationEvent' is never used (except inside its declaration)" doesn't get raised
